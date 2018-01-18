@@ -4,7 +4,7 @@ class NewGame extends React.Component {
 
   render() {
     return (
-        <button onClick={this.props.newGame}>Start Over</button>
+        <button className="new-button" onClick={this.props.newGame}>Start Over</button>
     );
   }
 }

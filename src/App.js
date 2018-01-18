@@ -2,7 +2,7 @@ import React from 'react';
 
 import NewGame from './NewGame';
 import Game from './Game';
-import Guess from './Guess'
+
 
 class App extends React.Component {
     constructor() {
@@ -11,6 +11,7 @@ class App extends React.Component {
         this.state = {
             correctAnswer: Math.round(Math.random() * 100) + 1,
             feedback: 'Make a guess!',
+            color: 'white',
             guesses: []
         };
 
@@ -23,11 +24,13 @@ class App extends React.Component {
         this.setState({
             correctAnswer: Math.round(Math.random() * 100) + 1,
             feedback: 'Make a guess!',
+            color: 'white',
             guesses: []
         })
     }
 
     checkInput(guess) {
+        const guesses = this.state.guesses;
         const { correctAnswer } = this.state;
         console.log(`The correct answer is ${correctAnswer}`);
         console.log(`The guess is: ${guess}`)
@@ -38,18 +41,30 @@ class App extends React.Component {
         }
         else if ( Math.abs(guess - correctAnswer) < 10) {
             this.setState({
-                feedback: 'Hot'
+                feedback: 'Hot',
+                color: '#ff8916'
             });
 
-        } else {
+        }
+        else if ( Math.abs(guess - correctAnswer) < 25 && Math.abs(guess - correctAnswer) < 11) {
             this.setState({
-                feedback: 'Cold'
+                feedback: 'Getting Warmer...',
+                color: '#ffd630'
+            });
+        }
+        else {
+            this.setState({
+                feedback: 'Cold',
+                color: '#0084ff'
             });
         }
     }
 
     addGuess(guess) {
         const guesses = this.state.guesses;
+        if (guesses.includes(guess)) {
+            return
+        }
         this.setState({
             guesses: [...this.state.guesses, guess]
         });
@@ -60,18 +75,11 @@ class App extends React.Component {
     render() {
         return (
             <main>
-                <h1>Hot and Cold</h1>
-                <NewGame newGame={this.newGame}/>
+                <h1 className="title">Hot and Cold</h1>
                 <div className="main-game">
-                    <Game correctAnswer={this.state.correctAnswer} guesses={this.state.guesses} feedback={this.state.feedback} checkInput={this.checkInput} addGuess={this.addGuess} winner={this.winner}/>
-                        <ul className="list-of-guesses">
-                            {
-                                Object
-                                    .keys(this.state.guesses)
-                                    .map(key => <Guess key={key} index={key} number={this.state.guesses[key]} />)
-                            }
-                        </ul>
+                    <Game color={this.state.color} correctAnswer={this.state.correctAnswer} guesses={this.state.guesses} feedback={this.state.feedback} checkInput={this.checkInput} addGuess={this.addGuess} winner={this.winner}/>
                 </div>
+                <NewGame newGame={this.newGame}/>
             </main>
         );
     }
