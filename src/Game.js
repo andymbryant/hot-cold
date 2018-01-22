@@ -32,7 +32,6 @@ class Game extends React.Component {
     }
 
   render() {
-    const guesses = this.props.guesses;
     const color = this.props.color;
     const divStyle = {
         background: color

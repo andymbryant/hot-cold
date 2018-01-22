@@ -30,11 +30,10 @@ class App extends React.Component {
     }
 
     checkInput(guess) {
-        const guesses = this.state.guesses;
         const { correctAnswer } = this.state;
         console.log(`The correct answer is ${correctAnswer}`);
         console.log(`The guess is: ${guess}`)
-        if (guess == correctAnswer) {
+        if (guess === correctAnswer) {
             this.setState({
                 feedback: 'You win! Click above to play again.'
             });
