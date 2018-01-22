@@ -28,6 +28,7 @@ class Game extends React.Component {
             this.props.addGuess(guess);
         }
         this.userInput.value = '';
+        console.log('hello');
     }
 
   render() {
