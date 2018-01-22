@@ -31,6 +31,8 @@ class Game extends React.Component {
         console.log('hello');
     }
 
+    //note
+
   render() {
     const color = this.props.color;
     const divStyle = {
