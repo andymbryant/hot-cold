@@ -10,3 +10,5 @@ class NewGame extends React.Component {
 }
 
 export default NewGame
+
+//note
